@@ -15,11 +15,11 @@ function fetchPlaylist(url, idx = 0) {
     .then(res => res.json())
     .then(data => data.relatedStreams)
     .then(renderData)
-    .catch(e => {
+    .catch(async e => {
       if (instances.length - idx === 1)
         alert(e.message);
       else
-        fetchPlaylist(url, idx + 1);
+        await fetchPlaylist(url, idx + 1);
     })
     .finally(() => {
       submitBtn.classList.toggle('is-loading');
