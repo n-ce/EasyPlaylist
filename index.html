@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="https://img.icons8.com/?size=32&id=UtE8jClKX0nY&format=png&color=000000">
+  <title>Easy Playlist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+  <script defer src="./script.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Easy Playlist
+      </h1>
+      <p class="subtitle">
+        Get Bash Command for downloading playlist videos of your yt-dlp python script
+      </p>
+      <form id="controller">
+
+        <input id="prefix" class="input" type="text" placeholder="Downloader Prefix" value="python a.py" />
+
+        <input id="link" class="input is-link my-2" type="url" placeholder="Enter playlist link" required />
+
+        <div class="control">
+          <button id="submit" class="button is-link">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+  <section class="section">
+    <div class="grid" id="container"></div>
+  </section>
+</body>
+
+</html>
