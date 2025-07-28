@@ -1,14 +1,16 @@
+// @ts-ignore
+import './style.css';
+
 const uma = "https://raw.githubusercontent.com/n-ce/Uma/main/dynamic_instances.json";
-const instances = [];
-const controller = document.getElementById('controller');
-const prefixInput = document.getElementById('prefix');
-const linkInput = document.getElementById('link');
-const submitBtn = document.getElementById('submit');
-const renderRoot = document.getElementById('container');
-const idExtractor = (id) => id.split('?list=')[1].slice(0, 34);
+const instances: string[] = [];
+const controller = document.forms[0] as HTMLFormElement;
+const [prefixInput, linkInput] = document.getElementsByTagName('input') as HTMLCollectionOf<HTMLInputElement>;
+const submitBtn = controller.lastElementChild as HTMLButtonElement;
+const renderRoot = document.getElementsByTagName('section')[0] as HTMLDivElement;
+const idExtractor = (id: string) => id.split('?list=')[1].slice(0, 34);
 
 
-function fetchPlaylist(url, idx = 0) {
+async function fetchPlaylist(url: string, idx = 0) {
   submitBtn.classList.toggle('is-loading');
 
   fetch(instances[idx] + '/playlists/' + idExtractor(url))
@@ -26,21 +28,25 @@ function fetchPlaylist(url, idx = 0) {
     });
 }
 
-function renderData(data) {
+
+
+function renderData(data: Record<'title' | 'url', string>[]) {
   renderRoot.innerHTML = data.reduce((_, v) => _ + `
-      <div class="cell box is-clipped">
+      <article>
         <figure>
-          <img class="is-rounded" src="https://i.ytimg.com/vi_webp/${v.url.slice(-11)}/hqdefault.webp" />
+          <img src="https://i.ytimg.com/vi_webp/${v.url.slice(-11)}/mqdefault.webp" />
           <figcaption>${v.title}</figcaption>
         </figure>
-        <button class="button is-pulled-right">${prefixInput.value} https://youtu.be/${v.url.slice(-11)}</button>
-      </div>     
+        <samp>${prefixInput.value} https://youtu.be/${v.url.slice(-11)}</samp>
+      </article>
       `, '');
 }
 
 fetch(uma)
   .then(res => res.json())
-  .then(data => data.piped.forEach(instance => instances.push(instance)))
+  .then((data: {
+    piped: string[]
+  }) => data.piped.forEach((instance) => instances.push(instance)))
   .catch(e => alert(e.message || 'Instances Down'))
   .finally(() => console.log(instances));
 
@@ -51,9 +57,9 @@ controller.addEventListener('submit', (e) => {
 });
 
 renderRoot.addEventListener('click', (e) => {
-  const btn = e.target;
-  if (!btn.matches('button')) return;
+  const btn = e.target as HTMLInputElement;
+  if (!btn.matches('samp')) return;
   if (navigator.clipboard?.writeText)
-    navigator.clipboard.writeText(btn.textContent);
+    navigator.clipboard.writeText(btn.textContent || '');
   else alert('clipboard not supported');
 });

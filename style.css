@@ -1,0 +1,46 @@
+@import 'open-props/normalize.min.css';
+
+body {
+  font-family: var(--font-industrial);
+  padding: var(--size-fluid-2);
+
+
+  h1 {
+    font-weight: var(--font-weight-3);
+  }
+
+  form {
+    margin-top: var(--size-2);
+  }
+
+  input,
+  button {
+    margin-right: var(--size-2);
+    border-radius: var(--radius-1);
+
+    @media(orientation:portrait) {
+      width: 100%;
+      margin: var(--size-2) 0;
+    }
+  }
+
+  section {
+    display: grid;
+    gap: var(--size-4);
+    margin-top: var(--size-fluid-2);
+
+    @media(orientation:landscape) {
+      grid-template-columns: auto auto auto auto;
+    }
+  }
+
+  article {
+    overflow: hidden;
+
+    img {
+      border-radius: var(--radius-2);
+    }
+
+  }
+
+}
