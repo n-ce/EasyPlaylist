@@ -35,7 +35,9 @@ body {
       border-radius: var(--radius-2);
     }
     samp {
-      border: var(--border-size-2) dotted var(--gray-1);
+      padding: var(--size-1) var(--size-2);
+      border: var(--border-size-2) solid var(--gray-5);
+      box-shadow: var(--inner-shadow-4);
     }
   }
 }
