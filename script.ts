@@ -5,14 +5,12 @@ const uma = "https://raw.githubusercontent.com/n-ce/Uma/main/dynamic_instances.j
 const instances: string[] = [];
 const controller = document.forms[0] as HTMLFormElement;
 const [prefixInput, linkInput] = document.getElementsByTagName('input') as HTMLCollectionOf<HTMLInputElement>;
-const submitBtn = controller.lastElementChild as HTMLButtonElement;
 const renderRoot = document.getElementsByTagName('section')[0] as HTMLDivElement;
 const idExtractor = (id: string) => id.split('?list=')[1].slice(0, 34);
 
 
 async function fetchPlaylist(url: string, idx = 0) {
-  submitBtn.classList.toggle('is-loading');
-
+  renderRoot.innerHTML = 'Loading...';
   fetch(instances[idx] + '/playlists/' + idExtractor(url))
     .then(res => res.json())
     .then(data => data.relatedStreams)
@@ -22,12 +20,8 @@ async function fetchPlaylist(url: string, idx = 0) {
         alert(e.message);
       else
         await fetchPlaylist(url, idx + 1);
-    })
-    .finally(() => {
-      submitBtn.classList.toggle('is-loading');
     });
 }
-
 
 
 function renderData(data: Record<'title' | 'url', string>[]) {
