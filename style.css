@@ -3,16 +3,12 @@
 body {
   font-family: var(--font-industrial);
   padding: var(--size-fluid-2);
-
-
   h1 {
     font-weight: var(--font-weight-3);
   }
-
   form {
     margin-top: var(--size-2);
   }
-
   input,
   button {
     margin-right: var(--size-2);
@@ -23,7 +19,6 @@ body {
       margin: var(--size-2) 0;
     }
   }
-
   section {
     display: grid;
     gap: var(--size-4);
@@ -36,11 +31,13 @@ body {
 
   article {
     overflow: hidden;
-
     img {
       border-radius: var(--radius-2);
     }
-
+    samp {
+      background-color: var(--gray-5);
+      border: var(--border-size-2) dotted var(--gray-1);
+      border-radius: var(--border-blob-4);
+    }
   }
-
 }
